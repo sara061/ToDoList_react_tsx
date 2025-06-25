@@ -28,10 +28,18 @@ export const App = () => {
     { id: v1(), title: 'RTK query', isDone: false },
   ])
 
+ const changeTaskStatus = (taskId: string, isDone: boolean) => {
+
+      const task = tasks.find((t) => t.id === taskId);
+      if (task) {
+        task.isDone = isDone;
+        setTasks([...tasks]);
+      }
+
+ };
+
   const deleteTask = (taskId: string) => {
-    const filteredTasks = tasks.filter( task => {
-      return task.id !== taskId
-    })
+    const filteredTasks = tasks.filter(task => task.id !== taskId)
       setTasks(filteredTasks);
   }
 
@@ -49,6 +57,7 @@ export const App = () => {
    const newTasks = [newTask, ...tasks]
    setTasks(newTasks);
  }
+
   return (
     <div className="app">
       <TodolistItem
@@ -57,6 +66,7 @@ export const App = () => {
         deleteTask={deleteTask}
         changeFilter={changeFilter}
         createTask = {createTask}
+        changeTaskStatus={changeTaskStatus}
       />
     </div>
   );

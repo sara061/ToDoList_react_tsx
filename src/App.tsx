@@ -30,12 +30,13 @@ export const App = () => {
 
  const changeTaskStatus = (taskId: string, isDone: boolean) => {
 
-      const task = tasks.find((t) => t.id === taskId);
+     /* const task = tasks.find((t) => t.id === taskId);
       if (task) {
         task.isDone = isDone;
         setTasks([...tasks]);
-      }
-
+      }*/
+    const newState = tasks.map(task => task.id == taskId ? { ...task, isDone} : task)
+    setTasks(newState);
  };
 
   const deleteTask = (taskId: string) => {
